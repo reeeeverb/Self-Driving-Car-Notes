@@ -1,0 +1,77 @@
+## Hardware and Software Architectures
+
+#### Sensors  
+- exterceptive record properties of the surrondings
+- proprioceptive record internal properties
+
+#### Common Sensors (Internal)
+- Camera: passive light collecting sensor
+  - goal is to accomplish with this alone 
+  - resolution, FOV and dynamic range(lightest to darkest colors)
+  - stereo cameras use at least 2 cameras to estimate depth 
+- LIDAR creates 3D geometery from reflected light
+  - much more universal than cameras 
+  - number of beams, points per second, FOV and rotation rate 
+- RADAR are very similar but use radio waves 
+  - range, FOV and accuracy
+  - can be wide angle with short range or vice versa 
+- Sonar sensors use sound waves 
+  - short range all weather 
+  - used for parking 
+
+#### Common Sensors (External)
+- GPS for location, velocity and angular rotation rate
+- Wheel odometry estimates the wheel rpm for speed and drift 
+
+#### Software Stack 
+- Environment Perception 
+  - Identify where the ego is and where the other objects are
+- Enviroment Mapping
+  - Lay out the area around the car
+- Motion Planning
+  - Decides what actions to take
+- Controller
+  - takes the step to follow the planned motions 
+- System Supervisor
+
+#### Enviroment Perception 
+- Localization modules takes in multiple streams of info
+- outputs the vehicle position 
+  - course 2
+- dynamic objects 
+  - tracked over time and bounding boxes
+  - object motion is predicted
+- static objects 
+  - labeled and decided if it is neccesary to investigate
+    - such as signs 
+
+#### Enviroment Maps Module 
+- Occupancy grid map 
+  - all static objects around the vehicle
+  - prob there is an object in an area
+- Localization map
+  - used by localization module to determine motion of the car 
+- Detailed Road Map
+  - map of road segments 
+  - signs and lane markings 
+
+#### Motion Planning Module
+- Mission planner handles long term planning
+  - start point to end point 
+  - a more complex google maps 
+- Behavior planner decides the number of safe behaviors 
+  - lane changes and constraints on actions 
+- Local planner is immediate and reactive
+  - planned trajectory for a short period of time into the future
+
+#### Controller 
+- Velocity controller 
+- Steering controller 
+
+#### System Supervisor 
+- hardware supervisor 
+  - continuously monitors hardware to ensure there are no errors
+  - hard stop domains for failing sensors
+- software supervisor
+  - analyze inconsistency in what values you get and what is to be expected
+
